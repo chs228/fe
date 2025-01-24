@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Navigation & Trigonometry Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            text-align: center; 
+            background: linear-gradient(135deg, #4a90e2, #50c9c3);
+            color: #333;
+        }
+        
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            margin-bottom: 20px; 
+            display: flex; 
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            margin: 0 15px; 
+            text-decoration: none; 
+            color: #ffffff; 
+            padding: 10px 15px; 
+            border-radius: 5px; 
+            transition: background-color 0.3s, color 0.3s; 
+        }
+
+        nav a:hover {
+            background-color: #5d00ff; 
+            color: white; 
+            text-decoration: none; 
+        }
+
+        .calculator { 
+            background-color: #ffffff; 
+            border-radius: 10px; 
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+            padding: 15px; 
+            width: 300px; 
+            margin: auto; 
+        }
+
+        .display { 
+            width: 100%; 
+            height: 40px; 
+            font-size: 18px; 
+            text-align: right; 
+            padding: 5px; 
+            border: 2px solid #007BFF; 
+            border-radius: 5px; 
+            margin-bottom: 10px; 
+            background-color: #e6e6e6; 
+        }
+
+        .button { 
+            width: 50px; 
+            height: 50px; 
+            font-size: 16px; 
+            margin: 5px; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #007BFF; 
+            color: white; 
+            cursor: pointer; 
+            transition: background 0.3s, transform 0.2s; 
+        }
+
+        .button:hover { 
+            background-color: #0056b3; 
+            transform: scale(1.05); 
+        }
+
+        .button:active { 
+            transform: scale(0.95); 
+        }
+
+        .button:focus {
+            outline: none;
+        }
+
+        h2, h3 { 
+            font-size: 18px; 
+            margin: 10px 0; 
+            color: #007BFF; 
+        }
+
+        #resultDisplay { 
+            height: 80px; 
+            text-align: left; 
+            padding: 5px; 
+            border: 1px solid #007BFF; 
+            border-radius: 5px; 
+            background-color: #f9f9f9; 
+            margin-top: 10px; 
+        }
+    </style>
+</head>
+<body>
+    <h1><B>Calculator Navigation</B></h1>
+    <nav>
+        <a href="/b">Basic Arithmetic</a>
+        <a href="/t">Trigonometric Functions</a>
+        <a href="/m">Matrix Operations</a>
+        <a href="#base-conversion">Base Conversion</a>
+    </nav>5
+
+    <div class="calculator">
+        <h2>Trigonometry Calculator</h2>
+        <input type="text" class="display" id="angleInput" placeholder="Enter angle (degrees)">
+        <div>
+            <button class="button" onclick="clearDisplay()">C</button>
+        </div>
+        <h3>Operations:</h3>
+        <div>
+            <button class="button" onclick="calculate('sin')">sin</button>
+            <button class="button" onclick="calculate('cos')">cos</button>
+            <button class="button" onclick="calculate('tan')">tan</button>
+            <button class="button" onclick="calculate('csc')">csc</button>
+            <button class="button" onclick="calculate('sec')">sec</button>
+            <button class="button" onclick="calculate('cot')">cot</button>
+            <button class="button" onclick="calculate('asin')">asin</button>
+            <button class="button" onclick="calculate('acos')">acos</button>
+            <button class="button" onclick="calculate('atan')">atan</button>
+            <button class="button" onclick="calculate('sinh')">sinh</button>
+            <button class="button" onclick="calculate('cosh')">cosh</button>
+            <button class="button" onclick="calculate('tanh')">tanh</button>
+        </div>
+        <h3>Result:</h3>
+        <div id="resultDisplay"></div>
+    </div>
+
+    <script>
+        function clearDisplay() {
+            document.getElementById('angleInput').value = '';
+            document.getElementById('resultDisplay').innerText = '';
+        }
+
+        function calculate(operation) {
+            const angle = parseFloat(document.getElementById('angleInput').value);
+            if (isNaN(angle)) {
+                displayError('Please enter a valid angle.');
+                return;
+            }
+
+            // Convert degrees to radians for calculation
+            const radians = angle * (Math.PI / 180);
+            let result;
+
+            switch (operation) {
+                case 'sin':
+                    result = Math.sin(radians);
+                    break;
+                case 'cos':
+                    result = Math.cos(radians);
+                    break;
+                case 'tan':
+                    result = Math.tan(radians);
+                    break;
+                case 'csc':
+                    result = 1 / Math.sin(radians);
+                    break;
+                case 'sec':
+                    result = 1 / Math.cos(radians);
+                    break;
+                case 'cot':
+                    result = 1 / Math.tan(radians);
+                    break;
+                case 'asin':
+                    result = Math.asin(Math.sin(radians)) * (180 / Math.PI); // Convert back to degrees
+                    break;
+                case 'acos':
+                    result = Math.acos(Math.cos(radians)) * (180 / Math.PI); // Convert back to degrees
+                    break;
+                case 'atan':
+                    result = Math.atan(Math.tan(radians)) * (180 / Math.PI); // Convert back to degrees
+                    break;
+                case 'sinh':
+                    result = Math.sinh(radians);
+                    break;
+                case 'cosh':
+                    result = Math.cosh(radians);
+                    break;
+                case 'tanh':
+                    result = Math.tanh(radians);
+                    break;
+                default:
+                    result = 'Invalid operation';
+            }
+
+            displayResult(result);
+        }
+
+        function displayResult(result) {
+            const resultDisplay = document.getElementById('resultDisplay');
+            resultDisplay.innerText = result.toFixed(4) || "No Result"; // Format result to 4 decimal places
+        }
+
+        function displayError(message) {
+            document.getElementById('resultDisplay').innerText = message;
+        }
+    </script>
+</body>
+</html>

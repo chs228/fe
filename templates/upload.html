@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PDF</title>
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body Styling */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4a90e2, #50c9c3);
+            color: #333;
+        }
+
+        /* Container for Form */
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* Title Styling */
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #4a90e2;
+        }
+
+        /* Input File Styling */
+        input[type="file"] {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            width: 100%;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #4a90e2;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Loading Animation */
+        .loader {
+            display: none;
+            font-size: 16px;
+            margin-top: 20px;
+            color: #4a90e2;
+        }
+
+        .loader .dot {
+            animation: blink 1s infinite;
+        }
+
+        .loader .dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loader .dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes blink {
+            0%, 100% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Convert PDF to DOCX</h1>
+        <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data" onsubmit="startLoading()">
+            <input type="file" name="file" accept=".pdf" required>
+            <button type="submit">Convert to DOCX</button>
+        </form>
+        <div id="uploadingAnimation" class="loader">
+            Uploading<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+        </div>
+        <div id="convertingAnimation" class="loader">
+            Converting<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+        </div>
+        <footer>&copy; 2024 PDF to DOCX Converter</footer>
+    </div>
+
+    <script>
+        // Function to show upload animation on form submission
+        function startLoading() {
+            document.getElementById("uploadingAnimation").style.display = "block";
+            document.getElementById("convertingAnimation").style.display = "none";
+
+            // Simulate a delay to switch to conversion animation (for demonstration purposes)
+            setTimeout(() => {
+                document.getElementById("uploadingAnimation").style.display = "none";
+                document.getElementById("convertingAnimation").style.display = "block";
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

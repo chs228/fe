@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Compression Tool</title>
+    <style>
+        /* Basic Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Body Styling */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4a90e2, #50c9c3);
+            color: #333;
+        }
+
+        /* Container for Form */
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        /* Title Styling */
+        h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #4a90e2;
+        }
+
+        /* Info Box Styling */
+        .info {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        /* Form Group Styling */
+        .form-group {
+            margin: 20px 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        /* Input File and Select Styling */
+        input[type="file"],
+        select {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        /* Button Styling */
+        button {
+            background-color: #4a90e2;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        /* Error Message Styling */
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>PDF Compression Tool</h2>
+        <div class="info">
+            <p>⚡ Select a PDF file and compression level to reduce its file size.</p>
+            <p>📝 Higher compression = smaller file size but potentially lower quality.</p>
+        </div>
+        
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Select PDF file:</label>
+                <input type="file" name="pdf_file" accept=".pdf" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Compression Level:</label>
+                <select name="compression_level" required>
+                    <option value="low">Low (Better Quality)</option>
+                    <option value="medium" selected>Medium (Balanced)</option>
+                    <option value="high">High (Smaller Size)</option>
+                </select>
+            </div>
+            
+            <button type="submit">Compress PDF</button>
+        </form>
+        
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

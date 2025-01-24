@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            text-align: center; 
+            background: linear-gradient(135deg, #4a90e2, #50c9c3);
+            color: #333;
+        }
+        
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            margin-bottom: 20px; 
+            display: flex; 
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            margin: 0 15px; 
+            text-decoration: none; 
+            color: #ffffff; 
+            padding: 10px 15px; 
+            border-radius: 5px; 
+            transition: background-color 0.3s, color 0.3s; 
+        }
+
+        nav a:hover {
+            background-color: #5d00ff; 
+            color: white; 
+            text-decoration: none; 
+        }
+
+        .calculator { 
+            background-color: #ffffff; 
+            border-radius: 10px; 
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); 
+            padding: 30px; 
+            width: 400px; 
+            margin: 0 auto; /* Centering the calculator */
+            text-align: center; 
+        }
+
+        h2 { 
+            font-size: 24px; 
+            margin-bottom: 20px; 
+            color: #007BFF; 
+        }
+
+        .display { 
+            width: 100%; 
+            height: 40px; 
+            font-size: 18px; 
+            text-align: right; 
+            padding: 5px; 
+            border: 2px solid #007BFF; 
+            border-radius: 5px; 
+            margin-bottom: 20px; 
+            background-color: #e6e6e6; 
+        }
+
+        select {
+            width: 100%; 
+            padding: 10px; 
+            border-radius: 5px; 
+            border: 2px solid #007BFF; 
+            margin: 10px 0; 
+            font-size: 16px; 
+            background-color: #f9f9f9;
+            transition: border 0.3s;
+        }
+
+        select:hover {
+            border-color: #0056b3; 
+        }
+
+        .button { 
+            width: 100%; 
+            height: 50px; 
+            font-size: 18px; 
+            margin: 10px 0; 
+            border: none; 
+            border-radius: 5px; 
+            background-color: #007BFF; 
+            color: white; 
+            cursor: pointer; 
+            transition: background 0.3s, transform 0.2s; 
+        }
+
+        .button:hover { 
+            background-color: #0056b3; 
+            transform: scale(1.05); 
+        }
+
+        .button:active { 
+            transform: scale(0.95); 
+        }
+
+        .button:focus {
+            outline: none;
+        }
+
+        #resultDisplay { 
+            height: 40px; 
+            text-align: left; 
+            padding: 5px; 
+            border: 2px solid #007BFF; 
+            border-radius: 5px; 
+            background-color: #f9f9f9; 
+            margin-top: 10px; 
+            font-size: 18px;
+        }
+
+        #calculators {
+            margin-top: 20px;
+        }
+
+        #calculators h2 {
+            color: #007BFF; 
+        }
+
+        #calculators a {
+            display: inline-block; 
+            margin: 10px; 
+            text-decoration: none; 
+            background-color: #007BFF; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            transition: background 0.3s; 
+        }
+
+        #calculators a:hover {
+            background-color: #0056b3; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator Navigation</h1>
+    <nav>
+        <a href="/b">Basic Arithmetic</a>
+        <a href="/t">Trigonometric Functions</a>
+        <a href="/m">Matrix Operations</a>
+        <a href="#base-conversion">Base Conversion</a>
+    </nav>
+
+     <div class="calculator">
+        <h2>Base Conversion Calculator</h2>
+        <input type="text" class="display" id="numberInput" placeholder="Enter number">
+        
+        <select id="fromBase">
+            <option value="2">Binary (Base 2)</option>
+            <option value="8">Octal (Base 8)</option>
+            <option value="10" selected>Decimal (Base 10)</option>
+            <option value="16">Hexadecimal (Base 16)</option>
+        </select>
+        
+        <select id="toBase">
+            <option value="2">Binary (Base 2)</option>
+            <option value="8">Octal (Base 8)</option>
+            <option value="10" selected>Decimal (Base 10)</option>
+            <option value="16">Hexadecimal (Base 16)</option>
+        </select>
+        
+        <button class="button" onclick="convertBase()">Convert</button>
+        
+        <h3>Result:</h3>
+        <div id="resultDisplay"></div>
+    </div>
+
+    <script>
+        function convertBase() {
+            const numberInput = document.getElementById('numberInput').value.trim();
+            const fromBase = parseInt(document.getElementById('fromBase').value);
+            const toBase = parseInt(document.getElementById('toBase').value);
+            const resultDisplay = document.getElementById('resultDisplay');
+
+            // Validate input number based on fromBase
+            if (!isValidInput(numberInput, fromBase)) {
+                resultDisplay.innerText = 'Invalid input for the selected base.';
+                return;
+            }
+
+            let decimalNumber;
+
+            // Convert input number to decimal
+            try {
+                decimalNumber = parseInt(numberInput, fromBase);
+            } catch (error) {
+                resultDisplay.innerText = 'Error in conversion.';
+                return;
+            }
+
+            // Convert decimal to desired base
+            let convertedNumber;
+            if (toBase === 10) {
+                convertedNumber = decimalNumber.toString(10);
+            } else {
+                convertedNumber = decimalNumber.toString(toBase).toUpperCase();
+            }
+
+            resultDisplay.innerText = convertedNumber;
+        }
+
+        function isValidInput(input, base) {
+            const regexes = {
+                2: /^[01]+$/,                // Binary: only 0s and 1s
+                8: /^[0-7]+$/,               // Octal: 0-7
+                10: /^[0-9]+$/,              // Decimal: 0-9
+                16: /^[0-9A-Fa-f]+$/         // Hexadecimal: 0-9 and A-F
+            };
+            return regexes[base].test(input);
+        }
+    </script>
+</body>
+</html>

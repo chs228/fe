@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator Navigation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            text-align: center; 
+            background: linear-gradient(135deg, #4a90e2, #50c9c3);
+            color: #333;
+        }
+        
+        h1 {
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        nav {
+            margin-bottom: 20px; 
+            display: flex; 
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            margin: 0 15px; 
+            text-decoration: none; 
+            color: #ffffff; 
+            padding: 10px 15px; 
+            border-radius: 5px; 
+            transition: background-color 0.3s, color 0.3s; 
+        }
+
+        nav a:hover {
+            background-color: #5d00ff; 
+            color: white; 
+            text-decoration: none; 
+        }
+
+        .fact {
+            margin: 20px auto; 
+            padding: 20px; 
+            border: 1px solid #007BFF; 
+            border-radius: 8px; 
+            background-color: #ffffff; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px; 
+        }
+
+        .fact h2 {
+            margin-top: 0; 
+            color: #007BFF; 
+        }
+
+        .fact ul {
+            list-style-type: none; 
+            padding: 0; 
+            text-align: left;
+        }
+
+        .fact li {
+            padding: 5px 0; 
+        }
+
+        #calculators {
+            margin-top: 20px;
+        }
+
+        #calculators h2 {
+            color: #007BFF; 
+        }
+
+        #calculators a {
+            display: inline-block; 
+            margin: 10px; 
+            text-decoration: none; 
+            background-color: #007BFF; 
+            color: white; 
+            padding: 10px 20px; 
+            border-radius: 5px; 
+            transition: background 0.3s; 
+        }
+
+        #calculators a:hover {
+            background-color: #0056b3; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculator Navigation</h1>
+    <nav>
+        <a href="/b">Basic Arithmetic</a>
+        <a href="/t">Trigonometric Functions</a>
+        <a href="/m">Matrix Operations</a>
+        <a href="#base-conversion">Base Conversion</a>
+    </nav>
+
+    <div class="fact">
+        <h2>Interesting Math Facts</h2>
+        <p>Did you know that:</p>
+        <ul>
+            <li>The number <strong>0</strong> is the only number that is not positive or negative.</li>
+            <li>The <strong>infinity symbol (∞)</strong> was invented by John Wallis in 1655.</li>
+            <li>The <strong>golden ratio</strong>, approximately <strong>1.618</strong>, is often found in nature and art.</li>
+            <li><strong>Pythagorean triples</strong> are sets of three integers that satisfy the Pythagorean theorem.</li>
+            <li>The sum of the angles in a triangle is always <strong>180 degrees</strong>.</li>
+        </ul>
+    </div>
+
+ </body>
+</html>

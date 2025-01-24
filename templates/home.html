@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PDF Utilities</title>
+    <style>
+        /* Basic Body and Background */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #4a90e2, #50c9c3);
+            color: #333;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* Navigation Bar Styling */
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            background-color: #4a90e2;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Nav Links */
+        .nav-link {
+            margin: 0 15px;
+            padding: 10px 15px;
+            background-color: #4a90e2;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Button Hover Effect */
+        .nav-link:hover {
+            background-color: #357abd;
+        }
+
+        /* Slideshow Banner Styling */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            height: 50vh; /* Half the height of the viewport */
+            overflow: hidden;
+            margin-top: 60px; /* to ensure it appears below the fixed nav */
+            background-color: white; /* Added white background */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+        }
+
+        /* Add a white background behind the slides */
+        .slideshow-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white; /* White background */
+            z-index: 1; /* Behind the slides */
+            opacity: 0.8; /* Slightly transparent for effect */
+        }
+
+        /* Individual Slides */
+        .mySlides {
+            display: none;
+            height: 100%; /* Full height */
+            width: 100%; /* Full width */
+            position: relative; /* Positioning context for text */
+            z-index: 2; /* Above the white background */
+        }
+
+        /* Image Styling */
+        .mySlides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the container */
+        }
+
+        /* Title and Description on Slides */
+        .text {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #333; /* Change to dark color for better visibility */
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.6); /* White shadow for contrast */
+            background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent white background for text */
+            padding: 10px 15px; /* Add some padding */
+            border-radius: 5px; /* Rounded corners */
+            z-index: 3; /* Above everything else */
+        }
+
+        /* Dots for Slide Indicator */
+        .dot-container {
+            text-align: center;
+            margin-top: 10px;
+            z-index: 3; /* Above the white background */
+        }
+
+        .dot {
+            height: 15px;
+            width: 15px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+        .active {
+            background-color: #4a90e2; /* Color for active dot */
+        }
+
+        /* Marquee Styling */
+        .marquee {
+            font-size: 14px;
+            font-weight: bold;
+            color: #ff6b6b;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: scroll 10s linear infinite;
+        }
+
+        /* Keyframes for Animations */
+        @keyframes scroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .cont{
+            background-color: #fff;
+            width :700px;
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <div class="nav-bar">
+        <a href="/pdf_to_docx" class="nav-link">Convert PDF to DOCX</a>
+        <a href="/lock_pdf" class="nav-link">Lock PDF</a>
+        <a href="/unlock" class="nav-link">Unlock PDF</a>
+        <a href="/compress_pdf" class="nav-link">Compress PDF</a>
+        <a href="/merge_pdf" class="nav-link">Merge PDF</a>
+        <a href="/calculator" class="nav-link">calculate</a>
+    </div>
+    <div class = "cont">
+    <!-- Slideshow Banner -->
+    <div class="slideshow-container">
+        <div class="mySlides fade">
+            <img src="https://th.bing.com/th/id/OIG4.eS.rBsZsniUvkx4RrzwV?pid=ImgGn" alt="Slide 1">
+            <div class="text">Welcome to PDF Utilities!</div>
+        </div>
+        <div class="mySlides fade">
+            <img src="https://th.bing.com/th/id/OIG4.G2rKrUgZtNbrUiu49xJw?w=1024&h=1024&rs=1&pid=ImgDetMain" alt="Slide 2">
+            <div class="text">Your One-Stop PDF Solution!</div>
+        </div>
+        <div class="mySlides fade">
+            <img src="https://regal-daffodil-6dcbd2.netlify.app/1.jpeg" alt="Slide 3">
+            <div class="text">Effortlessly Manage Your PDFs!</div>
+        </div>
+    </div>
+
+    <!-- Dots for Slide Indicator -->
+    <div class="dot-container">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+</div>
+    <script>
+        // Slideshow Script
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("dot");
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none"; // Hide all slides
+                dots[i].className = dots[i].className.replace(" active", ""); // Remove active class from all dots
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) { slideIndex = 1 } // Reset to first slide
+            slides[slideIndex - 1].style.display = "block"; // Show current slide
+            dots[slideIndex - 1].className += " active"; // Highlight the active dot
+            setTimeout(showSlides, 3000); // Change slide every 3 seconds
+        }
+
+        function currentSlide(n) {
+            slideIndex = n - 1; // Update the slide index
+            showSlides(); // Show the current slide
+        }
+    </script>
+</body>
+</html>
